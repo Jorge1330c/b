@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boran's · Sana tu ser</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <img src="img/logo-borans.png" alt="Boran's" class="logo-img" />
+                <div>
+                    Boran´s
+                    <small>Sana tu ser</small>
+                </div>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#inicio" class="active">Inicio</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#servicios">Terapias</a>
+                <a href="#catalogo">Tienda</a>
+                <a href="#contacto">Contacto</a>
+                <button type="button" class="nav-cta" data-modal="modalReserva">
+                    <i class="fas fa-calendar-check"></i> Reservar
+                </button>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-btn" id="wishlistBtn" aria-label="Ver favoritos">
+                    <i class="far fa-heart"></i>
+                    <span class="icon-count" id="wishlistCount">0</span>
+                </button>
+
+                <button class="icon-btn theme-btn" id="themeBtn" aria-label="Cambiar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+
+                <div class="hamburger" id="hamburger" aria-label="Menú">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-leaf"></i>  equilibrio · 調和
+                </div>
+                <h1>Recupera tu <span>equilibrio</span> con Boran's</h1>
+                <p>
+                    Masajes, podología, acupuntura, quiropraxia, reiki y productos
+                    ortopédicos de alta calidad. La sabiduría oriental al servicio de tu bienestar.
+                </p>
+                <div class="hero-buttons">
+                    <button type="button" class="btn-primary" data-modal="modalReserva">
+                        <i class="fas fa-calendar-check"></i> Reservar Cita
+                    </button>
+                    <a href="#catalogo" class="btn-outline-light">
+                        <i class="fas fa-store"></i> Ver Catálogo
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <span class="motif">🏮</span>
+                <span class="motif large">☯</span>
+                <span class="motif">🎋</span>
+                <span class="motif">🌸</span>
+                <span class="motif">🗻</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NOSOTROS ===== -->
+    <section id="nosotros" class="bg-white">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag"><i class="fas fa-spa"></i>  filosofía</span>
+                <h2>Equilibrio para tu <span>cuerpo, mente</span> y bienestar</h2>
+                <p>
+                    En Boran's combinamos terapias ancestrales con tecnología moderna
+                    para ofrecerte un cuidado integral. Nuestro equipo de especialistas
+                    certificados te acompaña en cada paso de tu recuperación.
+                </p>
+                <div class="oriental-divider">
+                    <span class="line"></span>
+                    <span class="icon">☯</span>
+                    <span class="line"></span>
+                </div>
+            </div>
+
+            <div class="features-panel">
+                <div class="features-panel-item">
+                    <div class="features-panel-icon"><i class="fas fa-user-md"></i></div>
+                    <h4>Especialistas certificados</h4>
+                    <p>Profesionales con años de experiencia</p>
+                </div>
+                <div class="features-panel-item">
+                    <div class="features-panel-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Productos de alta calidad</h4>
+                    <p>Garantía y confianza en cada artículo</p>
+                </div>
+                <div class="features-panel-item">
+                    <div class="features-panel-icon"><i class="fas fa-spa"></i></div>
+                    <h4>Ambiente relajante</h4>
+                    <p>Espacios privados y acogedores</p>
+                </div>
+                <div class="features-panel-item">
+                    <div class="features-panel-icon"><i class="fas fa-heart"></i></div>
+                    <h4>Atención personalizada</h4>
+                    <p>Tratamientos a tu medida</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICIOS ===== -->
+    <section id="servicios" class="bg-red-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag"><i class="fas fa-hand-sparkles"></i>  servicios</span>
+                <h2>¿Cómo podemos <span>ayudarte</span> hoy?</h2>
+                <p>Tres pilares fundamentales para tu bienestar integral.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card terapias">
+                    <div class="icon">💆</div>
+                    <h3>Relajación &amp; Terapias</h3>
+                    <p>Libera el estrés y recupera tu movilidad con nuestras terapias manuales y energéticas.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> Masajes descontracturantes</li>
+                        <li><i class="fas fa-check-circle"></i> Masajes con piedras calientes</li>
+                        <li><i class="fas fa-check-circle"></i> Acupuntura &amp; Quiropraxia</li>
+                        <li><i class="fas fa-check-circle"></i> Reiki &amp; terapias energéticas</li>
+                    </ul>
+                    <button type="button" class="btn-primary btn-sm" data-modal="modalTerapias">
+                        Explorar Terapias
+                    </button>
+                </div>
+
+                <div class="service-card podologia">
+                    <div class="icon">🦶</div>
+                    <h3>Salud Podológica</h3>
+                    <p>Camina sin dolor, mejora tu postura. Cuidado integral del pie con tratamientos personalizados.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> Tratamiento de callosidades</li>
+                        <li><i class="fas fa-check-circle"></i> Uñas encarnadas</li>
+                        <li><i class="fas fa-check-circle"></i> Podología deportiva</li>
+                        <li><i class="fas fa-check-circle"></i> Estudio de la pisada</li>
+                    </ul>
+                    <button type="button" class="btn-primary btn-sm" data-modal="modalPodologia">
+                        Ver Servicios
+                    </button>
+                </div>
+
+                <div class="service-card ortopedia">
+                    <div class="icon">🛒</div>
+                    <h3>Soporte &amp; Recuperación</h3>
+                    <p>Lleva el cuidado a casa. Productos diseñados para tu recuperación y confort diario.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> Soportes cervicales y lumbares</li>
+                        <li><i class="fas fa-check-circle"></i> Calzado ortopédico y plantillas</li>
+                        <li><i class="fas fa-check-circle"></i> Rodilleras, tobilleras y férulas</li>
+                        <li><i class="fas fa-check-circle"></i> Accesorios para el hogar</li>
+                    </ul>
+                    <a href="#catalogo" class="btn-primary btn-sm">Ir a la Tienda</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CATÁLOGO ===== -->
+    <section id="catalogo" class="bg-white">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag"><i class="fas fa-box-open"></i>  catálogo</span>
+                <h2>Encuentra el soporte que tu <span>cuerpo</span> necesita</h2>
+                <p>Productos ortopédicos y deportivos recomendados por nuestros especialistas.</p>
+                <div class="oriental-divider">
+                    <span class="line"></span>
+                    <span class="icon">⛩️</span>
+                    <span class="line"></span>
+                </div>
+            </div>
+
+            <div class="catalog-search">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput"
+                       placeholder="Buscar por código o nombre... (ej: BRA 103, rodillera, faja)"
+                       autocomplete="off" />
+                <button class="search-clear" id="searchClear" aria-label="Limpiar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="catalog-filters" id="filterButtons">
+                <button class="active" data-filter="todos">Todos</button>
+                <button data-filter="cuello">Cuello</button>
+                <button data-filter="espalda">Espalda</button>
+                <button data-filter="piernas">Piernas</button>
+                <button data-filter="brazos">Brazos</button>
+            </div>
+
+            <div class="catalog-advanced-filters">
+                <div class="filter-group">
+                    <label for="sortSelect">Ordenar por</label>
+                    <select id="sortSelect">
+                        <option value="default">Relevancia</option>
+                        <option value="price-asc">Precio: menor a mayor</option>
+                        <option value="price-desc">Precio: mayor a menor</option>
+                        <option value="name-asc">Nombre: A → Z</option>
+                        <option value="name-desc">Nombre: Z → A</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="tipoSelect">Tipo de producto</label>
+                    <select id="tipoSelect">
+                        <option value="todos">Todos los tipos</option>
+                    </select>
+                </div>
+                <div class="filter-group filter-price">
+                    <label for="priceRange">Precio máximo</label>
+                    <div class="price-slider-wrap">
+                        <input type="range" id="priceRange" min="15" max="100" value="100" step="5" />
+                        <span class="price-label" id="priceLabel">Hasta S/ 100.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="catalog-counter" id="catalogCounter"></p>
+
+            <div class="products-grid" id="productGrid"></div>
+
+            <div class="catalog-more" id="catalogMore">
+                <button class="btn-secondary" id="loadMoreBtn">
+                    <i class="fas fa-plus"></i> Cargar más productos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIOS ===== -->
+    <section id="testimonios" class="bg-red-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag"><i class="fas fa-quote-left"></i>  testimonios</span>
+                <h2>Lo que dicen <span>nuestros clientes</span></h2>
+                <p>Experiencias reales de personas que han confiado en Boran's.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>
+                        “El masaje descontracturante me cambió la vida, y la plantilla ortopédica que me recomendaron es perfecta. Volveré sin dudar.”
+                    </blockquote>
+                    <div class="author">María G. <small>Paciente de podología y masajes</small></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>
+                        “Excelente atención en podología, muy profesionales y el local es muy acogedor. Me siento en buenas manos.”
+                    </blockquote>
+                    <div class="author">Javier R. <small>Tratamiento de uñas encarnadas</small></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>
+                        “La silla ergonómica Boran's y el collar cervical me han ayudado muchísimo con mi dolor de espalda. Productos de primera calidad.”
+                    </blockquote>
+                    <div class="author">Laura M. <small>Compra ortopédica</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACTO + MAPA ===== -->
+    <section id="contacto" class="bg-white">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag"><i class="fas fa-envelope"></i>  contacto</span>
+                <h2>¿Hablamos? <span>Estamos aquí</span> para ti</h2>
+                <p>Reserva tu cita, consulta nuestros servicios o visítanos en nuestro centro.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>📍 Boran's · Sana tu ser</h3>
+                    <p>Equilibrio para tu cuerpo, mente y bienestar.</p>
+
+                    <div class="contact-detail">
+                        <div class="icon"><i class="fas fa-map-pin"></i></div>
+                        <div class="info">
+                            <strong>Dirección</strong>
+                            <span>Av. César Vallejo, Villa EL Salvador 15834</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon"><i class="fas fa-phone"></i></div>
+                        <div class="info">
+                            <strong>Teléfono</strong>
+                            <span>963 546 040</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="info">
+                            <strong>WhatsApp</strong>
+                            <span>963 546 040 · Reservas rápidas</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon"><i class="fas fa-clock"></i></div>
+                        <div class="info">
+                            <strong>Horario</strong>
+                            <span>Lun – Vie: 9:00 – 20:00 · Sáb: 9:00 – 14:00</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon"><i class="fab fa-instagram"></i></div>
+                        <div class="info">
+                            <strong>Redes Sociales</strong>
+                            <span>@boransperu · Síguenos para consejos de bienestar</span>
+                        </div>
+                    </div>
+
+                    <div class="social-cta">
+                        <a href="#" class="social-btn"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#" class="social-btn"><i class="fab fa-facebook"></i> Facebook</a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h4><i class="fas fa-pen" style="color:var(--red);"></i> Envíanos un mensaje</h4>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" placeholder="Tu nombre" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" placeholder="tucorreo@ejemplo.com" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" placeholder="663 123 456" />
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" placeholder="¿En qué podemos ayudarte?"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i> Enviar mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="map-wrapper">
+                <div class="oriental-divider">
+                    <span class="line"></span>
+                    <span class="icon">🗺️</span>
+                    <span class="line"></span>
+                </div>
+                <h3 class="map-title">📍 <span>Encuéntranos</span> en el mapa</h3>
+                <p class="map-sub">Av. César Vallejo, Villa EL Salvador 15834</p>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d231.66254823375698!2d-76.9326651!3d-12.211189!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b9005d174677%3A0x9ae9895dbe268da3!2zQm9yYW7CtHM!5e1!3m2!1ses-419!2spe!4v1790030464858!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+                        width="100%" height="450" style="border:0;"
+                        allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo logo-footer">
+                        <img src="img/logo-borans.png" alt="Boran's" class="logo-img" />
+                        <div>
+                            Boran´s
+                            <small>Sana tu ser</small>
+                        </div>
+                    </a>
+                    <p>Equilibrio para tu cuerpo, mente y bienestar. Especialistas en terapias holísticas, podología y ortopedia.</p>
+                    <div class="kanji-row">
+                        <span>和</span><span>静</span><span>禅</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>Enlaces rápidos</h5>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#nosotros">Nosotros</a>
+                    <a href="#servicios">Terapias</a>
+                    <a href="#catalogo">Tienda Ortopédica</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <a href="#">Términos y condiciones</a>
+                    <a href="#">Política de devoluciones</a>
+                    <a href="#">Política de privacidad</a>
+                    <a href="#">Aviso legal</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Newsletter</h5>
+                    <p class="footer-news-text">Recibe consejos de bienestar y ofertas en productos ortopédicos.</p>
+                    <div class="footer-newsletter">
+                        <input type="email" placeholder="Tu correo electrónico" />
+                        <button class="btn-primary"><i class="fas fa-envelope"></i> Suscribirme</button>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>© 2026 Boran's · Sana tu ser. Todos los derechos reservados.</span>
+                <div>
+                    <span class="footer-badges">
+                        <span><i class="fas fa-shield-alt"></i> Productos certificados</span>
+                        <span><i class="fas fa-user-md"></i> Atención profesional</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== WHATSAPP FLOTANTE ===== -->
+    <a href="https://wa.me/51910475191?text=Hola%20Boran%27s%2C%20me%20gustar%C3%ADa%20reservar%20una%20cita."
+       target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- ===== BOTÓN VOLVER ARRIBA ===== -->
+    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ===== CARRITO (DRAWER) ===== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag"></i> Tu carrito</h3>
+            <button class="cart-close" id="cartClose" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="cart-body" id="cartBody"></div>
+
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-total">
+                <span>Total</span>
+                <strong id="cartTotal">S/ 0.00</strong>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-secondary btn-sm" id="cartClear">
+                    <i class="fas fa-trash-alt"></i> Vaciar
+                </button>
+                <button class="btn-primary btn-sm" id="cartCheckout">
+                    <i class="fab fa-whatsapp"></i> Enviar pedido
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ============================================================
+         MODAL · RESERVAR CITA (fecha/hora)
+         ============================================================ -->
+    <div class="modal-overlay" id="modalReserva" role="dialog" aria-modal="true" aria-labelledby="tituloReserva">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-heading">
+                    <span class="modal-icon">📅</span>
+                    <div>
+                        <h3 id="tituloReserva">Reservar Cita</h3>
+                        <p id="reservaSubtitulo">Elige servicio, fecha y hora disponible</p>
+                    </div>
+                </div>
+                <button class="modal-close" data-close aria-label="Cerrar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Panel de servicios preseleccionados -->
+                <div class="reserva-servicios-preview" id="reservaServiciosPreview" hidden>
+                    <div class="rsp-header">
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong id="rspCantidad">0</strong> servicio(s) seleccionado(s)</span>
+                        <button type="button" class="rsp-clear" id="reservaClearServicios"
+                                aria-label="Quitar servicios seleccionados">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="rsp-chips" id="rspChips"></div>
+                </div>
+
+                <form id="reservaForm" class="reserva-form" autocomplete="off">
+                    <div id="reservaCamposManuales">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reservaTipo">Tipo de servicio</label>
+                                <select id="reservaTipo">
+                                    <option value="">Selecciona...</option>
+                                    <option value="Terapias">Terapias</option>
+                                    <option value="Podología">Podología</option>
+                                    <option value="Consulta Ortopédica">Consulta Ortopédica</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="reservaServicio">Servicio específico</label>
+                                <select id="reservaServicio">
+                                    <option value="">Primero elige un tipo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reservaFecha">Fecha</label>
+                            <input type="date" id="reservaFecha" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="reservaHora">Hora disponible</label>
+                            <select id="reservaHora" required>
+                                <option value="">Elige fecha primero</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reservaNombre">Nombre completo</label>
+                            <input type="text" id="reservaNombre" placeholder="Tu nombre" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="reservaTelefono">Teléfono</label>
+                            <input type="tel" id="reservaTelefono" placeholder="987 654 321" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reservaNotas">Notas adicionales (opcional)</label>
+                        <textarea id="reservaNotas" placeholder="¿Alguna indicación especial?"></textarea>
+                    </div>
+                </form>
+
+                <div class="modal-note">
+                    <i class="fas fa-info-circle"></i>
+                    Atendemos de lunes a sábado. Los domingos permanecemos cerrados.
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="modal-selected" data-reserva-info>
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Completa el formulario para continuar</span>
+                </div>
+                <div class="modal-footer-actions">
+                    <button type="button" class="btn-secondary btn-sm" data-close>Cerrar</button>
+                    <button type="button" class="btn-primary btn-sm" id="reservaConfirm">
+                        <i class="fab fa-whatsapp"></i> Confirmar reserva
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         MODAL · RELAJACIÓN & TERAPIAS
+         ============================================================ -->
+    <div class="modal-overlay" id="modalTerapias" role="dialog" aria-modal="true" aria-labelledby="tituloTerapias">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-heading">
+                    <span class="modal-icon">💆</span>
+                    <div>
+                        <h3 id="tituloTerapias">Relajación &amp; Terapias</h3>
+                        <p>Selecciona los servicios que deseas reservar</p>
+                    </div>
+                </div>
+                <button class="modal-close" data-close aria-label="Cerrar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="service-list" data-service-group="Terapias">
+                    <article class="service-detail" data-service="Masaje descontracturante" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">💆</span>
+                        <div>
+                            <h4>Masaje descontracturante</h4>
+                            <p>Presión profunda sobre contracturas y nudos musculares para aliviar el dolor y devolver la movilidad.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail" data-service="Masaje con piedras calientes" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">🔥</span>
+                        <div>
+                            <h4>Masaje con piedras calientes</h4>
+                            <p>El calor profundo de las piedras volcánicas relaja la musculatura y mejora la circulación.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail" data-service="Acupuntura" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">📍</span>
+                        <div>
+                            <h4>Acupuntura</h4>
+                            <p>Estimulación de puntos energéticos con agujas finas para aliviar el dolor y equilibrar el organismo.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail" data-service="Quiropraxia" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">🦴</span>
+                        <div>
+                            <h4>Quiropraxia</h4>
+                            <p>Ajustes articulares precisos que alinean la columna, liberan tensión nerviosa y mejoran la postura.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail" data-service="Reiki y terapias energéticas" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">✨</span>
+                        <div>
+                            <h4>Reiki &amp; terapias energéticas</h4>
+                            <p>Canalización de energía para reducir el estrés, la ansiedad y favorecer el descanso profundo.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail" data-service="Reflexología podal" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">🦶</span>
+                        <div>
+                            <h4>Reflexología podal</h4>
+                            <p>Masaje de puntos reflejos en los pies que equilibra órganos y sistemas de todo el cuerpo.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="modal-note">
+                    <i class="fas fa-hand-pointer"></i>
+                    Toca uno o varios servicios para seleccionarlos. Luego reserva por WhatsApp.
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="modal-selected" data-selected-info>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Ningún servicio seleccionado</span>
+                </div>
+                <div class="modal-footer-actions">
+                    <button type="button" class="btn-secondary btn-sm" data-close>Cerrar</button>
+                    <button type="button" class="btn-primary btn-sm" data-reservar>
+                        <i class="fas fa-calendar-check"></i> Reservar selección
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         MODAL · SALUD PODOLÓGICA
+         ============================================================ -->
+    <div class="modal-overlay" id="modalPodologia" role="dialog" aria-modal="true" aria-labelledby="tituloPodologia">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-heading">
+                    <span class="modal-icon">🦶</span>
+                    <div>
+                        <h3 id="tituloPodologia">Salud Podológica</h3>
+                        <p>Selecciona los servicios que deseas reservar</p>
+                    </div>
+                </div>
+                <button class="modal-close" data-close aria-label="Cerrar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="service-list" data-service-group="Podología">
+                    <article class="service-detail" data-service="Tratamiento de callosidades" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">🧴</span>
+                        <div>
+                            <h4>Tratamiento de callosidades</h4>
+                            <p>Eliminación indolora de durezas, callos y helomas con instrumental esterilizado.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail" data-service="Uñas encarnadas" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">💅</span>
+                        <div>
+                            <h4>Uñas encarnadas</h4>
+                            <p>Tratamiento de onicocriptosis con técnica de recalce y seguimiento hasta la recuperación total.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail" data-service="Podología deportiva" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">🏃</span>
+                        <div>
+                            <h4>Podología deportiva</h4>
+                            <p>Prevención y tratamiento de lesiones en corredores y deportistas de alto impacto.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail" data-service="Estudio de la pisada" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">👣</span>
+                        <div>
+                            <h4>Estudio de la pisada</h4>
+                            <p>Análisis biomecánico para detectar alteraciones y recomendar la plantilla adecuada.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail" data-service="Quiropodia" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">🦶</span>
+                        <div>
+                            <h4>Quiropodia</h4>
+                            <p>Corte y fresado profesional de uñas, limpieza de surcos y cuidado integral del pie.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail" data-service="Hongos (onicomicosis)" tabindex="0" role="checkbox" aria-checked="false">
+                        <span class="sd-check"><i class="fas fa-check"></i></span>
+                        <span class="sd-icon">🦠</span>
+                        <div>
+                            <h4>Hongos (onicomicosis)</h4>
+                            <p>Diagnóstico y tratamiento de infecciones por hongos en uñas y piel del pie.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="modal-note">
+                    <i class="fas fa-hand-pointer"></i>
+                    Toca uno o varios servicios para seleccionarlos. Luego reserva por WhatsApp.
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="modal-selected" data-selected-info>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Ningún servicio seleccionado</span>
+                </div>
+                <div class="modal-footer-actions">
+                    <button type="button" class="btn-secondary btn-sm" data-close>Cerrar</button>
+                    <button type="button" class="btn-primary btn-sm" data-reservar>
+                        <i class="fas fa-calendar-check"></i> Reservar selección
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         MODAL · WISHLIST / FAVORITOS
+         ============================================================ -->
+    <div class="modal-overlay" id="modalWishlist" role="dialog" aria-modal="true" aria-labelledby="tituloWishlist">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-heading">
+                    <span class="modal-icon">❤️</span>
+                    <div>
+                        <h3 id="tituloWishlist">Mis Favoritos</h3>
+                        <p>Productos que has guardado</p>
+                    </div>
+                </div>
+                <button class="modal-close" data-close aria-label="Cerrar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="wishlist-grid" id="wishlistGrid"></div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="modal-selected active">
+                    <i class="fas fa-heart"></i>
+                    <span id="wishlistFooterInfo">0 productos guardados</span>
+                </div>
+                <div class="modal-footer-actions">
+                    <button type="button" class="btn-secondary btn-sm" data-close>Cerrar</button>
+                    <button type="button" class="btn-primary btn-sm" id="wishlistAddAll">
+                        <i class="fas fa-cart-plus"></i> Añadir todo al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación flotante -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
