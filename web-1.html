@@ -385,10 +385,11 @@
                 <p class="map-sub">Av. César Vallejo, Villa EL Salvador 15834</p>
                 <div class="map-container">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d231.66254823375698!2d-76.9326651!3d-12.211189!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b9005d174677%3A0x9ae9895dbe268da3!2zQm9yYW7CtHM!5e1!3m2!1ses-419!2spe!4v1790030464858!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d231.66254823375698!2d-76.9326651!3d-12.211189!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b9005d174677%3A0x9ae9895dbe268da3!2zQm9yYW7CtHM!5e1!3m2!1ses-419!2spe!4v1790030464858!5m2!1ses-419!2spe"
                         width="100%" height="450" style="border:0;"
-                        allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        title="Ubicación de Boran's en Google Maps"
+                        allowfullscreen loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin"></iframe>
                 </div>
             </div>
         </div>
@@ -479,6 +480,32 @@
         <div class="cart-body" id="cartBody"></div>
 
         <div class="cart-footer" id="cartFooter">
+            <div class="cart-coupon">
+                <label for="couponInput">Código de descuento</label>
+                <div class="coupon-row">
+                    <input type="text" id="couponInput" placeholder="Escribe tu código" autocomplete="off" />
+                    <button type="button" class="btn-secondary btn-sm" id="couponApply">Aplicar</button>
+                </div>
+                <div class="coupon-applied" id="couponApplied" hidden>
+                    <span><i class="fas fa-tag"></i> <strong id="couponCode"></strong></span>
+                    <button type="button" id="couponRemove" aria-label="Quitar código de descuento">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <p class="coupon-msg" id="couponMsg" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="cart-lines">
+                <div class="cart-line">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">S/ 0.00</span>
+                </div>
+                <div class="cart-line discount" id="cartDiscountLine" hidden>
+                    <span>Descuento</span>
+                    <span id="cartDiscount">− S/ 0.00</span>
+                </div>
+            </div>
+
             <div class="cart-total">
                 <span>Total</span>
                 <strong id="cartTotal">S/ 0.00</strong>
@@ -524,6 +551,7 @@
                         </button>
                     </div>
                     <div class="rsp-chips" id="rspChips"></div>
+                    <div class="rsp-total" id="rspTotal"></div>
                 </div>
 
                 <form id="reservaForm" class="reserva-form" autocomplete="off">
@@ -580,6 +608,7 @@
                 <div class="modal-note">
                     <i class="fas fa-info-circle"></i>
                     Atendemos de lunes a sábado. Los domingos permanecemos cerrados.
+                    Los precios son referenciales; el especialista los confirma en tu cita.
                 </div>
             </div>
 
