@@ -18,7 +18,7 @@ const CATEGORIAS = {
    3. CATÁLOGO · 83 PRODUCTOS
    ========================================================= */
 const PRODUCTOS = [
-    { file:'LM 144 COLLARIN CERVICAL BLANDO',                                   cat:'cuello',  tipo:'Cervical',    precio:24.90, badge:'',            emoji:'🧣' },
+    { file:'LM 144 COLLARIN CERVICAL BLANDO',                                   cat:'cuello',  tipo:'Cervical',    precio:24.90, badge:'',            emoji:'🧣', tallas:'estandar' },
     { file:'LM 167 COJIN CERVICAL VICOELÁSTICO',                                cat:'cuello',  tipo:'Cervical',    precio:39.90, badge:'',            emoji:'🛏️' },
 
     { file:'BRA 257 CINTURILLA DEPORTIVA',                                      cat:'espalda', tipo:'Cinturilla',  precio:19.90, badge:'',            emoji:'🩹' },
@@ -107,6 +107,81 @@ const PRODUCTOS = [
 ];
 
 /* =========================================================
+   3b. TALLAS
+   ---------------------------------------------------------
+   Cada tipo de producto usa un grupo de tallas.
+   - Para cambiar las tallas de un grupo, edita TALLAS.
+   - Para que un tipo tenga tallas, añádelo a TALLAS_POR_TIPO.
+   - Para un producto concreto, añade  tallas:'estandar'  (un grupo)
+     o  tallas:['Única']  (lista propia) o  tallas:[]  (sin tallas).
+   - Los productos con "KIDS" o "PEDIÁTRICO" usan tallas infantiles.
+   ========================================================= */
+const TALLAS = {
+    estandar: ['S', 'M', 'L', 'XL'],
+    calzado:  ['35-36', '37-38', '39-40', '41-42', '43-44'],
+    kids:     ['4-6 años', '7-9 años', '10-12 años']
+};
+
+const TALLAS_POR_TIPO = {
+    Rodillera: 'estandar', Tobillera: 'estandar', Muslera: 'estandar',
+    Muñequera: 'estandar', Codera: 'estandar',    Hombrera: 'estandar',
+    Faja: 'estandar',      Cinturilla: 'estandar', Corrector: 'estandar',
+    Cabestrillo: 'estandar', Soporte: 'estandar',  Suspensor: 'estandar',
+    Plantilla: 'calzado',  Talonera: 'calzado'
+};
+
+function tallasDe(p) {
+    if (p.tallas !== undefined) {
+        return Array.isArray(p.tallas) ? p.tallas : (TALLAS[p.tallas] || []);
+    }
+    if (/kids|pedi[aá]tric/i.test(p.file)) return TALLAS.kids;
+    const grupo = TALLAS_POR_TIPO[p.tipo];
+    return grupo ? TALLAS[grupo] : [];
+}
+
+/* =========================================================
+   3c. PRECIO Y DURACIÓN DE SERVICIOS
+   ---------------------------------------------------------
+   precio en soles (0 = gratis) · min = duración en minutos.
+   El nombre debe coincidir con data-service del HTML.
+   ========================================================= */
+const SERVICIOS_INFO = {
+    // Terapias
+    'Masaje descontracturante':     { precio: 70, min: 60 },
+    'Masaje con piedras calientes': { precio: 90, min: 75 },
+    'Acupuntura':                   { precio: 60, min: 45 },
+    'Quiropraxia':                  { precio: 70, min: 40 },
+    'Reiki y terapias energéticas': { precio: 60, min: 60 },
+    'Reflexología podal':           { precio: 50, min: 45 },
+    // Podología
+    'Tratamiento de callosidades':  { precio: 45, min: 40 },
+    'Uñas encarnadas':              { precio: 60, min: 45 },
+    'Podología deportiva':          { precio: 70, min: 50 },
+    'Estudio de la pisada':         { precio: 80, min: 45 },
+    'Quiropodia':                   { precio: 40, min: 40 },
+    'Hongos (onicomicosis)':        { precio: 55, min: 40 },
+    // Consulta ortopédica
+    'Evaluación postural':          { precio: 40, min: 30 },
+    'Recomendación de soportes':    { precio: 0,  min: 20 },
+    'Seguimiento de recuperación':  { precio: 30, min: 20 }
+};
+
+/* =========================================================
+   3d. CÓDIGOS DE DESCUENTO
+   ---------------------------------------------------------
+   tipo: 'porcentaje' (valor = %) o 'monto' (valor = soles)
+   minimo: compra mínima en soles (opcional)
+   vence:  'AAAA-MM-DD', último día válido (opcional)
+   Los códigos se escriben en MAYÚSCULAS.
+   ========================================================= */
+const CUPONES = {
+    'BIENESTAR10': { tipo: 'porcentaje', valor: 10, descripcion: '10% de descuento' },
+    'BORANS15':    { tipo: 'porcentaje', valor: 15, minimo: 100, descripcion: '15% en compras desde S/ 100' },
+    'SANA5':       { tipo: 'monto',      valor: 5,  minimo: 50,  descripcion: 'S/ 5 menos en compras desde S/ 50' },
+    'NAVIDAD20':   { tipo: 'porcentaje', valor: 20, vence: '2026-12-31', descripcion: '20% por Navidad' }
+};
+
+/* =========================================================
    4. UTILIDADES
    ========================================================= */
 function imagenProducto(p) {
@@ -122,6 +197,55 @@ function svgRespaldo(emoji) {
 }
 
 const formatoPrecio = n => 'S/ ' + n.toFixed(2);
+
+const nombreDe = file => file.split(' ').slice(2).join(' ');
+const codigoDe = file => file.split(' ').slice(0, 2).join(' ');
+
+function fechaISO(d) {
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+function fechaLegible(iso) {
+    const [a, m, d] = iso.split('-');
+    return `${d}/${m}/${a}`;
+}
+
+function formatoDuracion(min) {
+    if (min < 60) return `${min} min`;
+    const h = Math.floor(min / 60), r = min % 60;
+    return r ? `${h} h ${r} min` : `${h} h`;
+}
+const precioServicioTxt = n => n === 0 ? 'Gratis' : formatoPrecio(n);
+
+function resumenServicios(lista) {
+    return lista.reduce((acc, nombre) => {
+        const info = SERVICIOS_INFO[nombre];
+        if (info) { acc.precio += info.precio; acc.min += info.min; }
+        return acc;
+    }, { precio: 0, min: 0 });
+}
+
+function selectTallasHTML(p, extraClass = '') {
+    const tallas = tallasDe(p);
+    if (!tallas.length) return `<div class="size-picker is-empty ${extraClass}" aria-hidden="true"></div>`;
+    return `
+        <div class="size-picker ${extraClass}">
+            <select class="size-select" aria-label="Talla de ${nombreDe(p.file)}">
+                <option value="">Elige talla</option>
+                ${tallas.map(t => `<option value="${t}">Talla ${t}</option>`).join('')}
+            </select>
+        </div>`;
+}
+
+function marcarFaltaTalla(select) {
+    if (!select) return;
+    select.classList.remove('needs-size');
+    void select.offsetWidth;
+    select.classList.add('needs-size');
+    select.focus();
+}
+document.addEventListener('change', e => {
+    if (e.target.classList?.contains('size-select')) e.target.classList.remove('needs-size');
+});
 
 function normalizar(txt) {
     return (txt || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -181,10 +305,13 @@ themeBtn?.addEventListener('click', toggleTema);
 const STORAGE_KEY = 'borans_carrito';
 let carrito = [];
 
+const claveItem = (file, talla) => file + '||' + (talla || '');
+
 function cargarCarrito() {
     try {
         const datos = localStorage.getItem(STORAGE_KEY);
         carrito = datos ? JSON.parse(datos) : [];
+        carrito.forEach(it => { if (!it.key) it.key = claveItem(it.file, it.talla); });
     } catch { carrito = []; }
 }
 
@@ -194,6 +321,7 @@ function guardarCarrito() {
     } catch {}
 }
 
+/* Subtotal (antes de descuentos) */
 function totalCarrito() {
     return carrito.reduce((sum, it) => sum + it.precio * it.qty, 0);
 }
@@ -202,42 +330,54 @@ function totalUnidades() {
     return carrito.reduce((sum, it) => sum + it.qty, 0);
 }
 
-function agregarAlCarrito(file) {
+/* Devuelve true si se añadió, false si falta la talla */
+function agregarAlCarrito(file, talla = '', { silencioso = false } = {}) {
     const prod = PRODUCTOS.find(p => p.file === file);
-    if (!prod) return;
+    if (!prod) return false;
 
-    const existente = carrito.find(it => it.file === file);
+    if (tallasDe(prod).length && !talla) {
+        if (!silencioso) mostrarToast('Elige una talla antes de agregar', true);
+        return false;
+    }
+
+    const key = claveItem(file, talla);
+    const existente = carrito.find(it => it.key === key);
     if (existente) {
         existente.qty++;
     } else {
         carrito.push({
+            key,
             file: prod.file,
             nombre: prod.file,
             precio: prod.precio,
             emoji: prod.emoji,
             cat: prod.cat,
             tipo: prod.tipo,
+            talla,
             qty: 1
         });
     }
     guardarCarrito();
     renderCarrito();
     actualizarContadorCarrito(true);
-    mostrarToast(`✓ Añadido: ${prod.file.split(' ').slice(2).join(' ')}`);
+    if (!silencioso) {
+        mostrarToast(`✓ Añadido: ${nombreDe(prod.file)}${talla ? ' · Talla ' + talla : ''}`);
+    }
+    return true;
 }
 
-function eliminarDelCarrito(file) {
-    carrito = carrito.filter(it => it.file !== file);
+function eliminarDelCarrito(key) {
+    carrito = carrito.filter(it => it.key !== key);
     guardarCarrito();
     renderCarrito();
     actualizarContadorCarrito();
 }
 
-function cambiarCantidad(file, delta) {
-    const item = carrito.find(it => it.file === file);
+function cambiarCantidad(key, delta) {
+    const item = carrito.find(it => it.key === key);
     if (!item) return;
     item.qty += delta;
-    if (item.qty <= 0) { eliminarDelCarrito(file); return; }
+    if (item.qty <= 0) { eliminarDelCarrito(key); return; }
     guardarCarrito();
     renderCarrito();
     actualizarContadorCarrito();
@@ -252,6 +392,101 @@ function vaciarCarrito() {
     actualizarContadorCarrito();
     mostrarToast('Carrito vaciado');
 }
+
+/* ---------- Códigos de descuento ---------- */
+const COUPON_KEY = 'borans_cupon';
+let cuponActivo = '';
+
+function cargarCupon() {
+    try { cuponActivo = localStorage.getItem(COUPON_KEY) || ''; } catch { cuponActivo = ''; }
+    if (cuponActivo && !CUPONES[cuponActivo]) cuponActivo = '';
+}
+function guardarCupon() {
+    try {
+        cuponActivo ? localStorage.setItem(COUPON_KEY, cuponActivo)
+                    : localStorage.removeItem(COUPON_KEY);
+    } catch {}
+}
+
+/* Evalúa un código contra un subtotal */
+function evaluarCupon(codigo, subtotal) {
+    const c = CUPONES[codigo];
+    if (!c) return { estado: 'invalido', descuento: 0,
+        mensaje: 'Ese código no existe. Revisa que esté bien escrito.' };
+    if (c.vence && fechaISO(new Date()) > c.vence) return { estado: 'vencido', descuento: 0,
+        mensaje: `Este código venció el ${fechaLegible(c.vence)}.` };
+    if (c.minimo && subtotal < c.minimo) return { estado: 'minimo', descuento: 0,
+        mensaje: `Se aplica desde ${formatoPrecio(c.minimo)}. Te faltan ${formatoPrecio(c.minimo - subtotal)}.` };
+    const bruto = c.tipo === 'porcentaje' ? subtotal * c.valor / 100 : c.valor;
+    const descuento = Math.round(Math.min(bruto, subtotal) * 100) / 100;
+    return { estado: 'ok', descuento, mensaje: c.descripcion || 'Descuento aplicado' };
+}
+
+function calcularTotales() {
+    const subtotal = totalCarrito();
+    const ev = cuponActivo ? evaluarCupon(cuponActivo, subtotal) : null;
+    const descuento = ev?.descuento || 0;
+    return { subtotal, descuento, total: subtotal - descuento, ev };
+}
+
+function pintarCupon() {
+    const input   = document.getElementById('couponInput');
+    const row     = input?.closest('.coupon-row');
+    const applied = document.getElementById('couponApplied');
+    const msg     = document.getElementById('couponMsg');
+    if (!applied || !msg) return;
+
+    const { ev } = calcularTotales();
+    if (!cuponActivo) {
+        applied.hidden = true;
+        if (row) row.hidden = false;
+        return;
+    }
+    applied.hidden = false;
+    if (row) row.hidden = true;
+    document.getElementById('couponCode').textContent = cuponActivo;
+    msg.textContent = ev.mensaje;
+    msg.className = 'coupon-msg ' + (ev.estado === 'ok' ? 'ok' : 'warn');
+}
+
+function aplicarCupon() {
+    const input = document.getElementById('couponInput');
+    const msg   = document.getElementById('couponMsg');
+    if (!input) return;
+    const codigo = input.value.trim().toUpperCase().replace(/\s+/g, '');
+    if (!codigo) {
+        msg.textContent = 'Escribe un código para aplicarlo.';
+        msg.className = 'coupon-msg error';
+        input.focus();
+        return;
+    }
+    const ev = evaluarCupon(codigo, totalCarrito());
+    if (ev.estado === 'invalido' || ev.estado === 'vencido') {
+        msg.textContent = ev.mensaje;
+        msg.className = 'coupon-msg error';
+        input.select();
+        return;
+    }
+    cuponActivo = codigo;
+    guardarCupon();
+    input.value = '';
+    renderCarrito();
+    if (ev.estado === 'ok') mostrarToast(`✓ Código ${codigo} aplicado`);
+}
+
+function quitarCupon() {
+    cuponActivo = '';
+    guardarCupon();
+    const msg = document.getElementById('couponMsg');
+    if (msg) { msg.textContent = ''; msg.className = 'coupon-msg'; }
+    renderCarrito();
+}
+
+document.getElementById('couponApply')?.addEventListener('click', aplicarCupon);
+document.getElementById('couponInput')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); aplicarCupon(); }
+});
+document.getElementById('couponRemove')?.addEventListener('click', quitarCupon);
 
 function actualizarContadorCarrito(bump = false) {
     const count = document.getElementById('cartCount');
@@ -288,8 +523,8 @@ function renderCarrito() {
     body.innerHTML = carrito.map(it => {
         const img = CARPETA_IMG + encodeURIComponent(it.file + EXTENSION);
         const respaldo = svgRespaldo(it.emoji);
-        const code = it.file.split(' ').slice(0, 2).join(' ');
-        const nombre = it.file.split(' ').slice(2).join(' ');
+        const code = codigoDe(it.file);
+        const nombre = nombreDe(it.file);
         return `
             <div class="cart-item">
                 <div class="cart-item-img">
@@ -298,21 +533,21 @@ function renderCarrito() {
                 </div>
                 <div class="cart-item-info">
                     <h5>${nombre}</h5>
-                    <div class="code">${code}</div>
+                    <div class="code">${code}${it.talla ? ` · <span class="cart-size">Talla ${it.talla}</span>` : ''}</div>
                     <div class="unit-price">${formatoPrecio(it.precio)} c/u</div>
                 </div>
                 <div class="cart-item-controls">
                     <div class="qty-controls">
-                        <button class="qty-btn" data-action="dec" data-file="${it.file}">
+                        <button class="qty-btn" data-action="dec" data-key="${it.key}">
                             <i class="fas fa-minus"></i>
                         </button>
                         <span class="qty-value">${it.qty}</span>
-                        <button class="qty-btn" data-action="inc" data-file="${it.file}">
+                        <button class="qty-btn" data-action="inc" data-key="${it.key}">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
                     <span class="cart-item-subtotal">${formatoPrecio(it.precio * it.qty)}</span>
-                    <button class="item-remove" data-action="remove" data-file="${it.file}" aria-label="Quitar">
+                    <button class="item-remove" data-action="remove" data-key="${it.key}" aria-label="Quitar">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </div>
@@ -320,7 +555,15 @@ function renderCarrito() {
         `;
     }).join('');
 
-    totalEl.textContent = formatoPrecio(totalCarrito());
+    const { subtotal, descuento, total } = calcularTotales();
+    const subEl  = document.getElementById('cartSubtotal');
+    const dLine  = document.getElementById('cartDiscountLine');
+    const dEl    = document.getElementById('cartDiscount');
+    if (subEl) subEl.textContent = formatoPrecio(subtotal);
+    if (dLine) dLine.hidden = descuento <= 0;
+    if (dEl)   dEl.textContent = '− ' + formatoPrecio(descuento);
+    totalEl.textContent = formatoPrecio(total);
+    pintarCupon();
 }
 
 const cartBodyEl = document.getElementById('cartBody');
@@ -328,11 +571,10 @@ if (cartBodyEl) {
     cartBodyEl.addEventListener('click', e => {
         const btn = e.target.closest('[data-action]');
         if (!btn) return;
-        const action = btn.dataset.action;
-        const file   = btn.dataset.file;
-        if (action === 'inc')    cambiarCantidad(file, +1);
-        if (action === 'dec')    cambiarCantidad(file, -1);
-        if (action === 'remove') eliminarDelCarrito(file);
+        const { action, key } = btn.dataset;
+        if (action === 'inc')    cambiarCantidad(key, +1);
+        if (action === 'dec')    cambiarCantidad(key, -1);
+        if (action === 'remove') eliminarDelCarrito(key);
     });
 }
 
@@ -361,9 +603,17 @@ document.getElementById('cartCheckout')?.addEventListener('click', () => {
     if (carrito.length === 0) return;
     let msg = 'Hola Boran´s 👋, quiero hacer este pedido:\n\n';
     carrito.forEach(it => {
-        msg += `• ${it.qty}x ${it.file} — S/ ${(it.precio * it.qty).toFixed(2)}\n`;
+        const talla = it.talla ? ` (Talla ${it.talla})` : '';
+        msg += `• ${it.qty}x ${it.file}${talla} — ${formatoPrecio(it.precio * it.qty)}\n`;
     });
-    msg += `\nTotal: S/ ${totalCarrito().toFixed(2)}`;
+    const { subtotal, descuento, total, ev } = calcularTotales();
+    if (descuento > 0) {
+        msg += `\nSubtotal: ${formatoPrecio(subtotal)}`;
+        msg += `\nCódigo ${cuponActivo}: − ${formatoPrecio(descuento)}`;
+    } else if (cuponActivo && ev) {
+        msg += `\n(Código ${cuponActivo} no aplicado: ${ev.mensaje})`;
+    }
+    msg += `\n*Total: ${formatoPrecio(total)}*`;
     window.open('https://wa.me/51910475191?text=' + encodeURIComponent(msg), '_blank');
 });
 
@@ -461,6 +711,7 @@ function renderWishlist() {
                     <h5>${nombre}</h5>
                     <div class="wcode">${code}</div>
                     <div class="price">${formatoPrecio(p.precio)}</div>
+                    ${tallasDe(p).length ? selectTallasHTML(p, 'size-picker-sm') : ''}
                 </div>
                 <div class="wishlist-item-actions">
                     <button class="add-btn" data-action="add" data-file="${p.file}">
@@ -481,7 +732,10 @@ if (wishlistGrid) {
         const btn = e.target.closest('[data-action]');
         if (!btn) return;
         const { action, file } = btn.dataset;
-        if (action === 'add')    agregarAlCarrito(file);
+        if (action === 'add') {
+            const select = btn.closest('.wishlist-item')?.querySelector('.size-select');
+            if (!agregarAlCarrito(file, select?.value || '')) marcarFaltaTalla(select);
+        }
         if (action === 'remove') toggleFavorito(file);
     });
 }
@@ -493,8 +747,23 @@ document.getElementById('wishlistBtn')?.addEventListener('click', () => {
 
 document.getElementById('wishlistAddAll')?.addEventListener('click', () => {
     if (favoritos.length === 0) return;
-    favoritos.forEach(f => agregarAlCarrito(f));
-    mostrarToast(`✓ ${favoritos.length} productos añadidos al carrito`);
+    let añadidos = 0;
+    const sinTalla = [];
+    document.querySelectorAll('#wishlistGrid .wishlist-item').forEach(item => {
+        const file   = item.dataset.file;
+        const select = item.querySelector('.size-select');
+        if (agregarAlCarrito(file, select?.value || '', { silencioso: true })) {
+            añadidos++;
+        } else {
+            sinTalla.push(nombreDe(file));
+            marcarFaltaTalla(select);
+        }
+    });
+    if (sinTalla.length) {
+        mostrarToast(`${añadidos ? `✓ ${añadidos} añadidos. ` : ''}Elige la talla de: ${sinTalla.join(', ')}`, true);
+    } else {
+        mostrarToast(`✓ ${añadidos} productos añadidos al carrito`);
+    }
 });
 
 /* =========================================================
@@ -593,6 +862,7 @@ function renderCatalogo() {
                     <h4>${nombre}</h4>
                     <div class="category">${CATEGORIAS[p.cat]} · ${code}</div>
                     <div class="price">${formatoPrecio(p.precio)}</div>
+                    ${selectTallasHTML(p)}
                     <button class="btn-primary btn-sm add-to-cart" data-file="${p.file}">
                         <i class="fas fa-cart-plus"></i> Agregar
                     </button>
@@ -608,7 +878,8 @@ function renderCatalogo() {
 grid.addEventListener('click', e => {
     const addBtn = e.target.closest('.add-to-cart');
     if (addBtn) {
-        agregarAlCarrito(addBtn.dataset.file);
+        const select = addBtn.closest('.product-card')?.querySelector('.size-select');
+        if (!agregarAlCarrito(addBtn.dataset.file, select?.value || '')) marcarFaltaTalla(select);
         return;
     }
     const wishBtn = e.target.closest('.wish-toggle');
@@ -761,13 +1032,13 @@ const reservaCantidad = document.getElementById('rspCantidad');
 const reservaClearBtn = document.getElementById('reservaClearServicios');
 const reservaCampos   = document.getElementById('reservaCamposManuales');
 const reservaSub      = document.getElementById('reservaSubtitulo');
+const reservaTotalEl  = document.getElementById('rspTotal');
+
+/* Anticipación mínima para reservar el mismo día (minutos) */
+const ANTICIPACION_MIN = 60;
 
 if (reservaFecha) {
-    const hoy = new Date();
-    const yyyy = hoy.getFullYear();
-    const mm = String(hoy.getMonth() + 1).padStart(2, '0');
-    const dd = String(hoy.getDate()).padStart(2, '0');
-    reservaFecha.min = `${yyyy}-${mm}-${dd}`;
+    reservaFecha.min = fechaISO(new Date());
 }
 
 /* Actualizar resumen de selección en modales de servicios */
@@ -788,9 +1059,9 @@ function actualizarResumen(modal) {
         }
     } else {
         infoBox.classList.add('active');
-        span.textContent = seleccionados.length === 1
-            ? '1 servicio seleccionado'
-            : `${seleccionados.length} servicios seleccionados`;
+        const r = resumenServicios([...seleccionados].map(el => el.dataset.service));
+        const cant = seleccionados.length === 1 ? '1 servicio' : `${seleccionados.length} servicios`;
+        span.textContent = `${cant} · ${formatoDuracion(r.min)} · ${precioServicioTxt(r.precio)}`;
         if (btnReservar) {
             btnReservar.disabled = false;
             btnReservar.style.opacity = '1';
@@ -798,6 +1069,18 @@ function actualizarResumen(modal) {
         }
     }
 }
+
+/* Mostrar duración y precio en cada tarjeta de servicio */
+document.querySelectorAll('.service-detail').forEach(card => {
+    const info = SERVICIOS_INFO[card.dataset.service];
+    const texto = card.querySelector('div');
+    if (!info || !texto) return;
+    texto.insertAdjacentHTML('beforeend', `
+        <div class="sd-meta">
+            <span><i class="far fa-clock"></i> ${formatoDuracion(info.min)}</span>
+            <strong>${precioServicioTxt(info.precio)}</strong>
+        </div>`);
+});
 
 document.querySelectorAll('.service-detail').forEach(card => {
     const toggle = () => {
@@ -850,6 +1133,7 @@ function pintarServiciosReserva() {
 
     if (reservaServiciosTemp.length === 0) {
         reservaPreview.hidden = true;
+        if (reservaTotalEl) reservaTotalEl.innerHTML = '';
         if (reservaCampos) reservaCampos.style.display = '';
         if (reservaSub) reservaSub.textContent = 'Elige servicio, fecha y hora disponible';
         return;
@@ -863,10 +1147,18 @@ function pintarServiciosReserva() {
 
     reservaCantidad.textContent = reservaServiciosTemp.length;
 
+    if (reservaTotalEl) {
+        const r = resumenServicios(reservaServiciosTemp);
+        reservaTotalEl.innerHTML = `
+            <span><i class="far fa-clock"></i> Duración aprox. <strong>${formatoDuracion(r.min)}</strong></span>
+            <span>Total estimado <strong>${precioServicioTxt(r.precio)}</strong></span>`;
+    }
+
     reservaChips.innerHTML = reservaServiciosTemp.map((s, i) => `
         <span class="rsp-chip">
             <i class="fas fa-check"></i>
             ${s}
+            ${SERVICIOS_INFO[s] ? `<small>${precioServicioTxt(SERVICIOS_INFO[s].precio)}</small>` : ''}
             <button type="button" data-idx="${i}" aria-label="Quitar ${s}">
                 <i class="fas fa-times"></i>
             </button>
@@ -901,7 +1193,11 @@ function llenarServicios() {
     if (!tipo || !SERVICIOS_RESERVA[tipo]) return;
     SERVICIOS_RESERVA[tipo].forEach(s => {
         const opt = document.createElement('option');
-        opt.value = s; opt.textContent = s;
+        const info = SERVICIOS_INFO[s];
+        opt.value = s;
+        opt.textContent = info
+            ? `${s} · ${formatoDuracion(info.min)} · ${precioServicioTxt(info.precio)}`
+            : s;
         reservaServicio.appendChild(opt);
     });
 }
@@ -916,9 +1212,24 @@ function llenarHorarios() {
         reservaHora.innerHTML = '<option value="">Domingo cerrado</option>';
         return;
     }
-    const horasDisponibles = dia === 6
+    let horasDisponibles = dia === 6
         ? HORARIOS.filter(h => parseInt(h) < 14)
         : HORARIOS;
+
+    // Si es hoy, solo horas con al menos ANTICIPACION_MIN minutos de margen
+    if (reservaFecha.value === fechaISO(new Date())) {
+        const ahora = new Date();
+        const limite = ahora.getHours() * 60 + ahora.getMinutes() + ANTICIPACION_MIN;
+        horasDisponibles = horasDisponibles.filter(h => {
+            const [hh, mm] = h.split(':').map(Number);
+            return hh * 60 + mm >= limite;
+        });
+        if (horasDisponibles.length === 0) {
+            reservaHora.innerHTML = '<option value="">No quedan horas hoy, elige otra fecha</option>';
+            return;
+        }
+    }
+
     horasDisponibles.forEach(h => {
         const opt = document.createElement('option');
         opt.value = h; opt.textContent = h;
@@ -939,12 +1250,12 @@ function actualizarResumenReserva() {
         return;
     }
 
-    const partes = fecha.split('-');
-    const fechaFmt = `${partes[2]}/${partes[1]}/${partes[0]}`;
+    const lista = reservaServiciosTemp.length > 0 ? reservaServiciosTemp : [reservaServicio.value];
+    const r = resumenServicios(lista);
     const titulo = reservaServiciosTemp.length > 0
         ? `${reservaServiciosTemp.length} servicio(s)`
         : reservaServicio.value;
-    reservaInfo.textContent = `${titulo} · ${fechaFmt} · ${hora}`;
+    reservaInfo.textContent = `${titulo} · ${fechaLegible(fecha)} · ${hora} · ${precioServicioTxt(r.precio)}`;
 }
 
 reservaTipo?.addEventListener('change', () => { llenarServicios(); actualizarResumenReserva(); });
@@ -983,7 +1294,14 @@ reservaConfirm?.addEventListener('click', () => {
     let msg = `Hola Boran´s 👋, quiero reservar una cita:\n\n`;
     msg += `🗂️ *Categoría:* ${categoria}\n`;
     msg += `📋 *Servicios:*\n`;
-    servicios.forEach(s => { msg += `   • ${s}\n`; });
+    servicios.forEach(s => {
+        const info = SERVICIOS_INFO[s];
+        msg += info
+            ? `   • ${s} (${formatoDuracion(info.min)} · ${precioServicioTxt(info.precio)})\n`
+            : `   • ${s}\n`;
+    });
+    const r = resumenServicios(servicios);
+    if (r.min) msg += `💰 *Total estimado:* ${precioServicioTxt(r.precio)} · aprox. ${formatoDuracion(r.min)}\n`;
     msg += `📅 *Fecha:* ${fechaFmt}\n`;
     msg += `⏰ *Hora:* ${hora}\n`;
     msg += `👤 *Nombre:* ${nombre}\n`;
@@ -1090,6 +1408,7 @@ if (contactForm) {
    ========================================================= */
 cargarTema();
 cargarCarrito();
+cargarCupon();
 cargarFavoritos();
 poblarTipos();
 renderCarrito();
